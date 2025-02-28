@@ -26,20 +26,20 @@ This is the starter repository for Lab 1 of the Full Stack Web Development cours
 2. Update `style.css` with your own styling
 3. Commit and push your changes to Github.
 
-# 📊 Grading Scheme (Auto-Graded with GitHub Actions)
+## 📊 Grading Scheme (Auto-Graded with GitHub Actions)
 
 Your submission will be automatically graded based on the following criteria:
 
-| Criterion | Points |
-|-----------|--------|
-| **index.html exists** | 0.5 |
-| **style.css exists** | 0.5 |
-| **index.html includes `<h1>` tag** | 0.5 |
-| **index.html includes `<p>` tag** | 0.5 |
-| **CSS file is correctly linked in `index.html`** | 0.5 |
-| **Basic CSS styles are present (background color and font family)** | 0.5 |
-| **Code is successfully pushed to GitHub** | 1.0 |
-| **Total** | **4.0** |
+| **Category** | **Criterion** | **Points** |
+|-------------|-------------|---------|
+| **Files Exist (1 pt total)** | `index.html` exists | 0.5 |
+| | `style.css` exists | 0.5 |
+| **HTML Structure (1 pt total)** | `index.html` includes `<h1>` tag | 0.5 |
+| | `index.html` includes `<p>` tag | 0.5 |
+| **CSS Setup (1 pt total)** | CSS file is correctly linked in `index.html` | 0.5 |
+| | Basic CSS styles are present (background color and font family) | 0.5 |
+| **GitHub Submission (1 pt total)** | Code is successfully pushed to GitHub | 1.0 |
+| | **Total** | **4.0** |
 
 ### 🚀 How Auto-Grading Works
 - Once you push your code to GitHub, the **GitHub Actions workflow** will automatically check your submission.
@@ -53,3 +53,4 @@ Your submission will be automatically graded based on the following criteria:
 4. Open the workflow run and check the **"Final Score"** section.
 
 💡 **Tip:** If something is missing or incorrect, commit and push updates before the due date!
+

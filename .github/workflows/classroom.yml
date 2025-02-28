@@ -1,0 +1,78 @@
+name: AutoGrade Lab 1
+
+on: [push, pull_request]
+
+jobs:
+  check-submission:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Initialize Score
+        run: |
+          echo "SCORE=0" >> $GITHUB_ENV
+          export SCORE=0
+
+      - name: Check for Required Files (1 point)
+        run: |
+          if [ -f "index.html" ]; then
+            echo "✅ index.html exists! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ index.html is missing!"
+          fi
+          if [ -f "style.css" ]; then
+            echo "✅ style.css exists! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ style.css is missing!"
+          fi
+
+      - name: Validate HTML (1 point)
+        run: |
+          if grep -q "<h1>" index.html; then
+            echo "✅ Found <h1> tag! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ Missing <h1> tag!"
+          fi
+          if grep -q "<p>" index.html; then
+            echo "✅ Found <p> tag! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ Missing <p> tag!"
+          fi
+
+      - name: Validate CSS (1 point)
+        run: |
+          if grep -q '<link rel="stylesheet" type="text/css" href="style.css">' index.html; then
+            echo "✅ CSS file is correctly linked! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ CSS file is not linked in index.html!"
+          fi
+          if grep -q "background-color" style.css && grep -q "font-family" style.css; then
+            echo "✅ Basic CSS styles are present! (+0.5 pt)"
+            export SCORE=$(echo "$SCORE + 0.5" | bc)
+            echo "SCORE=$SCORE" >> $GITHUB_ENV
+          else
+            echo "❌ Missing required CSS styles!"
+          fi
+
+      - name: Check if Code is Pushed (1 point)
+        run: |
+          echo "✅ Code successfully pushed to GitHub! (+1 pt)"
+          export SCORE=$(echo "$SCORE + 1" | bc)
+          echo "SCORE=$SCORE" >> $GITHUB_ENV
+
+      - name: Final Score
+        run: |
+          echo "## Final Score: $SCORE/4" >> $GITHUB_STEP_SUMMARY
+          echo "Final Score: $SCORE/4"
